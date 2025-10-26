@@ -1,18 +1,26 @@
 ---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
 const pageTitle = "Su di me";
 
 const identity = {
   firstName: "Davide",
   country: "Italia",
-  occupation: "Softwarista",
-  hobbies: ["gaming", "natura", "astronomia"],
+  occupation: "programmatore",
+  hobbies: ["infastidire", "emettere peti", "astronomia"],
 };
 
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Fare big cacca"];
+const skills = ["HTML", "CSS", "JavaScript", "Odore di cornflakes", "Astro", "Fare big cacca"];
 
 const happy = true;
 const finished = false;
 const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -22,11 +30,20 @@ const goal = 3;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
+            <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+            </style>
 	</head>
 	<body>
-        <a href="/">Home</a>
-        <a href="/about/">Su di me</a>
-        <a href="/blog/">Pubblicazioni</a>
+        <Header />
 
         <h1>{pageTitle}</h1>
         <h2>... e il mio nuovo sito Astro!</h2>
@@ -41,15 +58,19 @@ const goal = 3;
         <li>Due dei miei hobby sono: {identity.hobbies[0]} e {identity.hobbies[1]}</li>
     }
     </ul>
+
     <p>Le mie competenze sono:</p>
     <ul>
-    {skills.map((skill) => <li>{skill}</li>)}
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
+
     {happy && <p>Sono felice di imparare Astro!</p>}
-
     {finished && <p>Ho finito questo tutorial!</p>}
-
     {goal === 3 ? <p>Il mio obiettivo è finire in 3 giorni.</p> : <p>Il mio obiettivo non è 3 giorni.</p>}
-
+        
+    <Footer />
+    <script>
+        import "../scripts/menu.js";
+    </script>
     </body>
 </html>
